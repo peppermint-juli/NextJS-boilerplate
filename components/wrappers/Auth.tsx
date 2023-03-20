@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 
@@ -12,36 +11,42 @@ interface Props {
   children: any
 }
 
+// export const redirectToLoginPortal = (basePath: string, asPath: string) => {
+//   if (basePath !== '/, asPath: stringdatasets/[...slug]') {
+//     window.location.href = `${process.env.NEXT_PUBLIC_LOGIN_PORTAL_URL}Account/Login?callbackUrl=${window.location.origin}${basePath}${asPath}`;
+//   }
+// };
+
 export const AuthWrapper: FC<Props> = ({ children }) => {
 
   const router = useRouter();
 
   const [checkedAuth, setCheckedAuth] = useState<boolean>(false);
   const [isAuthenticatedLocal, setIsAuthenticatedLocal] = useState<boolean>(false);
-  const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
+  const { setIsAuthenticated } = useContext(UserContext);
 
   const checkAuth = async () => {
-    setIsAuthenticated(AuthService.isAuthenticated());
-    setIsAuthenticatedLocal(AuthService.isAuthenticated());
+    setIsAuthenticated(await AuthService.isAuthenticated());
+    setIsAuthenticatedLocal(await AuthService.isAuthenticated());
     setCheckedAuth(true);
+  };
+
+  const verifyToken = async () => {
+
+    if (!isAuthenticatedLocal) {
+      router.push('login');
+      return;
+    }
   };
 
   useEffect(() => {
     if (!checkedAuth) {
       checkAuth();
+      return;
     }
 
-  }, []);
-
-  useEffect(() => {
-    if (checkedAuth) {
-      if (isAuthenticatedLocal) {
-        router.push('/');
-        return;
-      }
-      router.push('/login');
-    }
-  }, [isAuthenticatedLocal, checkedAuth]);
+    verifyToken();
+  }, [checkedAuth, router.asPath]);
 
   return (
     <>

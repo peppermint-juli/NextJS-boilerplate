@@ -24,21 +24,25 @@
       "default": "#fafafa"
     },
     "primary": {
-      "light": "rgba(28, 188, 141, 0.6)",
-      "main": "rgba(28, 188, 141, 1)",
-      "dark": "rgba(70, 131, 197, 1)",
+      "light": "#046B9F",
+      "main": "#023047",
+      "dark": "#fff",
       "contrastText": "#fff"
     },
     "secondary": {
-      "light": "rgb(141, 221, 198, 0.6)",
-      "main": "rgb(141, 221, 198, 1)",
-      "dark": "rgb(141, 221, 198, 1)",
+      "light": "rgb(249, 170, 51, 0.6)",
+      "main": "#F18805",
+      "dark": "rgb(249, 170, 51, 1)",
       "contrastText": "#fff"
     },
+    "icons": {
+      "drawer": "#BCBCBE",
+      "text": "#fff"
+    },
     "error": {
-      "light": "#e57373",
-      "main": "#f44336",
-      "dark": "#d32f2f",
+      "light": "rgb(255, 16, 31, 0.6)",
+      "main": "#FC2828",
+      "dark": "rgb(200, 16, 31, 1)",
       "contrastText": "#fff"
     },
     "text": {
@@ -72,22 +76,22 @@
         "height": "36px",
         "border-color": "#E0E0E0",
         "&:hover, &.Mui-selected, &.MuiButtonBase-root.Mui-selected:hover": {
-          "background-color": "#8DDDC6",
-          "color": "#1CBC8D",
-          "border-color": "#8DDDC6"
+          "background-color": "#023047",
+          "color": "#023047",
+          "border-color": "#023047"
         },
         "&.Mui-selected": {
           "font-weight": 500,
-          "color": "#1CBC8D"
+          "color": "#023047"
         }
       }
     },
     "MuiButtonGroup": {
       "groupedOutlinedPrimary": {
         "&.selected, &:hover": {
-          "color": "#1CBC8D",
-          "background-color": "#8DDDC6",
-          "border-color": "#8DDDC6"
+          "color": "#023047",
+          "background-color": "#023047",
+          "border-color": "#023047"
         },
         "border": "1px solid rgba(0, 0, 0, 0.14)",
         "color": "#333333",
@@ -157,7 +161,7 @@
     },
     "MuiCheckbox": {
       "root": {
-        "&.Mui-selected": "rgba(28, 188, 141, 1)",
+        "&.Mui-selected": "#023047",
         "color": "#DADADA",
         "margin-right": "15px",
         "margin-left": "5px",
@@ -167,6 +171,7 @@
     },
     "MuiTabs": {
       "root": {
+        "&.Mui-selected": "#023047",
         "border-bottom": "1px solid #e8e8e8",
         "margin-bottom": "10px"
       }

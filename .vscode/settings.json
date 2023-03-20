@@ -1,0 +1,13 @@
+{
+  "deepscan.ignoreConfirmWarning": true,
+  "eslint.enable": true,
+  "eslint.packageManager": "yarn",
+  "eslint.alwaysShowStatus": true,
+  "eslint.validate": [
+    "html",
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+}

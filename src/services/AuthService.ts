@@ -1,18 +1,19 @@
+import Cookies from 'js-cookie';
 import { ACCESS_TOKEN_KEY } from '../utils/keys';
 
-export class AuthService {
-  static getToken(): string {
-    return sessionStorage.getItem(ACCESS_TOKEN_KEY) || '';
-  }
+export const AuthService = {
+  getToken(): string {
+    return Cookies.get(ACCESS_TOKEN_KEY) || '';
+  },
 
-  static isAuthenticated(): boolean {
-    return sessionStorage.getItem(ACCESS_TOKEN_KEY) != null;
-  }
+  isAuthenticated(): boolean {
+    return Cookies.get(ACCESS_TOKEN_KEY) != null;
+  },
 
-  static async login(
+  async login(
     token: string,
   ) {
-    sessionStorage.setItem(ACCESS_TOKEN_KEY, token);
+    Cookies.set(ACCESS_TOKEN_KEY, token);
   }
 
-}
+};

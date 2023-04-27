@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import {
   Divider,
   Drawer,
@@ -10,11 +10,14 @@ import {
   ListItemText,
   Toolbar
 } from '@mui/material';
-import { ChevronLeft as ChevronLeftIcon, Dataset as DatasetIcon, Menu as MenuIcon, AutoGraph as AutoGraphIcon, Folder as FolderIcon } from '@mui/icons-material';
+import { Close as CloseIcon, Speed as SpeedIcon, Menu as MenuIcon, InfoOutlined as InfoIcon, FactCheck as FactCheckIcon } from '@mui/icons-material';
 import styled from 'styled-components';
-import { AppContext } from '../../context';
+import { AppContext, UserContext } from '../../context';
 import Image from 'next/image';
 import logo from '../../public/logo.png';
+import { Privilege } from '../../src/graphql/typings';
+import { useRouter } from 'next/router';
+import { Option } from './layout';
 
 export const drawerOpenWidth = 200;
 export const drawerClosedWidth = 60;
@@ -35,9 +38,16 @@ const Styled = styled.div`
       padding-left: 10px;
     }
   }  
+
+  .subitem {
+    padding-left: 55px;
+  }
   
   .contrast {
     color: ${({ theme }) => theme.palette.icons.drawer};
+  }
+  .contrast-agency {
+    color: ${({ theme }) => theme.palette.primary.lighter};
   }
   .contrast-white {
     color: ${({ theme }) => theme.palette.icons.text};
@@ -54,7 +64,23 @@ const Styled = styled.div`
 
 export const DrawerNav = () => {
 
-  const { drawerOpen, setDrawerOpen } = useContext(AppContext);
+  const router = useRouter();
+
+  const { runId } = router.query;
+
+  const { drawerOpen, setDrawerOpen, menuOption, setMenuOption } = useContext(AppContext);
+  const { user } = useContext(UserContext);
+
+  const agencies = useMemo<Privilege[]>(() => user ? user.privileges : [], [user]);
+
+  const isAgencySelected = (runIdParam: string) => {
+    return menuOption === 'dashboard' && runId && runId === runIdParam;
+  };
+
+  const handleSelectMenuOption = (option: Option) => {
+    setMenuOption(option);
+    router.push(`/${option}`);
+  };
 
   return (
     <Styled {...{ open: drawerOpen }}>
@@ -63,7 +89,7 @@ export const DrawerNav = () => {
         open={drawerOpen}>
         <Toolbar>
           <IconButton className={`toggle-button-${drawerOpen ? 'open' : 'close'} contrast-white`} aria-label="toggle-drawer-open" onClick={() => setDrawerOpen(!drawerOpen)} >
-            {drawerOpen ? <ChevronLeftIcon /> : <MenuIcon />}
+            {drawerOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
           {drawerOpen &&
             <Image src={logo} alt="Logo" width={130} />
@@ -71,28 +97,35 @@ export const DrawerNav = () => {
         </Toolbar>
         <Divider />
         <List>
-          <ListItem className="selected" disablePadding>
+          <ListItem onClick={() => handleSelectMenuOption('dashboard')} className={menuOption === 'dashboard' ? 'selected' : 'contrast'} disablePadding>
             <ListItemButton >
               <ListItemIcon>
-                <DatasetIcon />
+                <SpeedIcon />
               </ListItemIcon>
-              <ListItemText primary="Datasets" />
+              <ListItemText primary="Dashboard" />
+            </ListItemButton>
+          </ListItem>
+          {drawerOpen && agencies.map(a => (
+            <ListItem key={a.agency} onClick={() => router.push(`/dashboard/${a.runId}`)} className={isAgencySelected(a.runId) ? 'selected' : 'contrast-agency'} disablePadding>
+              <ListItemButton>
+                <ListItemText className="subitem" primary={a.agency.toUpperCase()} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon className="contrast" >
+                <FactCheckIcon />
+              </ListItemIcon>
+              <ListItemText className="contrast" primary="Review" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon className="contrast" >
-                <AutoGraphIcon />
+                <InfoIcon />
               </ListItemIcon>
-              <ListItemText className="contrast" primary="Notebooks" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon className="contrast" >
-                <FolderIcon />
-              </ListItemIcon>
-              <ListItemText className="contrast" primary="Files" />
+              <ListItemText className="contrast" primary="About" />
             </ListItemButton>
           </ListItem>
         </List>

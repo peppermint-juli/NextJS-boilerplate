@@ -36,7 +36,18 @@ export default function App({ Component, pageProps }: AppProps) {
 
   main {
     margin-top: 20px;
+
+    .big-number {
+      font-size: 40px;
+      font-weight: 400;
+      margin: 0px;
+    }
+
+    .big-number-label {
+      text-transform: uppercase;
+    }
   }
+
 `;
 
   const theme = createTheme({

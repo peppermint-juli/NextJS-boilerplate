@@ -1,7 +1,8 @@
 import { VisibilityOff, Visibility } from '@mui/icons-material';
-import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, Button, TextField } from '@mui/material';
+import { FormControl, InputAdornment, IconButton, Button, TextField, Box, CircularProgress } from '@mui/material';
+import { green } from '@mui/material/colors';
 import { useRouter } from 'next/router';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import { api } from '../../../src/services/api';
@@ -49,27 +50,29 @@ const LoginForm: FC = () => {
   const [passError, setPassError] = useState(false);
 
   const [loginError, setLoginError] = useState<string>('');
+  const [loadingLogin, setLoadingLogin] = useState<boolean>(false);
 
   const [userName, setUserName] = useState<string>('');
   const [pass, setPass] = useState<string>('');
 
-
   const handleLogin = async () => {
-
     if (userName !== '' && pass !== '') {
+      setLoadingLogin(true);
       const res = await api.auth.login(userName, pass);
 
       switch (res) {
         case 'Unauthorized': {
           setLoginError('Incorrect Username or Password');
+          setLoadingLogin(false);
           break;
         }
         case 'Success': {
-          router.push('dashboard');
+          router.push('/dashboard');
           break;
         }
         default: {
           setLoginError(res);
+          setLoadingLogin(false);
           break;
         }
       }
@@ -119,7 +122,7 @@ const LoginForm: FC = () => {
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
-                ),
+                )
               }}
               label="Password"
             />
@@ -128,7 +131,28 @@ const LoginForm: FC = () => {
             <caption>{loginError}</caption>
           }
         </div>
-        <Button onClick={handleLogin} variant="contained">Login</Button>
+        <Box sx={{ m: 1, position: 'relative' }}>
+          <Button
+            variant="contained"
+            disabled={loadingLogin}
+            onClick={handleLogin}
+          >
+            Login
+          </Button>
+          {loadingLogin && (
+            <CircularProgress
+              size={24}
+              sx={{
+                color: green[500],
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: '-12px',
+                marginLeft: '-12px'
+              }}
+            />
+          )}
+        </Box>
       </div>
     </Styled>
   );

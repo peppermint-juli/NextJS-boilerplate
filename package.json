@@ -17,6 +17,7 @@
     "@mui/material": "^5.10.16",
     "@mui/styled-engine": "^5.10.16",
     "@mui/styled-engine-sc": "^5.10.16",
+    "@mui/x-data-grid": "^6.0.4",
     "@reduxjs/toolkit": "^1.9.1",
     "@types/node": "18.11.10",
     "@types/react": "18.0.25",

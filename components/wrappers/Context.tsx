@@ -1,11 +1,11 @@
-import { useState, FC, useEffect } from 'react';
+import { useState, FC } from 'react';
 
 // Components
 import { Option } from '../common/layout';
 
 // Context
 import { UserContext, AppContext } from '../../context';
-import { User } from '../../src/models/user';
+import { User } from '../../src/graphql/typings';
 
 interface Props {
   children: any
@@ -23,24 +23,10 @@ export const ContextWrapper: FC<Props> = ({ children }) => {
     setIsAuthenticated
   };
 
-  const [menuOption, setMenuOption] = useState<Option>('datasets');
+  const [menuOption, setMenuOption] = useState<Option>('dashboard');
   const [drawerOpen, setDrawerOpen] = useState<boolean>(true);
 
   const appValue = { menuOption, setMenuOption, drawerOpen, setDrawerOpen };
-
-  useEffect(() => {
-
-    const preloadState = async () => {
-      const userLS = await localStorage.getItem('user');
-
-      if (userLS) {
-        setUser(JSON.parse(userLS));
-      }
-    };
-
-    preloadState();
-
-  }, []);
 
   return (
     <UserContext.Provider value={userValue}>

@@ -45,4 +45,4 @@ export const AutoCompleteFilter: FC<Props> = ({ options, value, handleFilter, pl
       )}
     />
   </Styled>;
-}
+};

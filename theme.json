@@ -24,6 +24,7 @@
       "default": "#fafafa"
     },
     "primary": {
+      "lighter": "#8ECAE6",
       "light": "#046B9F",
       "main": "#023047",
       "dark": "#fff",
@@ -44,6 +45,11 @@
       "main": "#FC2828",
       "dark": "rgb(200, 16, 31, 1)",
       "contrastText": "#fff"
+    },
+    "success": {
+      "light": "rgb(33, 186, 69, 0.6)",
+      "main": "rgb(33, 186, 69, 1)",
+      "contrastText": "#E6E6E6"
     },
     "text": {
       "primary": "#202124",

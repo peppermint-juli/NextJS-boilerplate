@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext } from 'react';
 import { Option } from '../components/common/layout';
-import { User } from '../src/models/user';
+import { User } from '../src/graphql/typings';
 
 interface UserContextInterface {
   isAuthenticated: boolean;
@@ -26,7 +26,7 @@ interface AppContextInterface {
 }
 
 export const AppContext = createContext<AppContextInterface>({
-  menuOption: 'datasets',
+  menuOption: 'dashboard',
   setMenuOption: (option) => { },
   drawerOpen: true,
   setDrawerOpen: (open: boolean) => { }

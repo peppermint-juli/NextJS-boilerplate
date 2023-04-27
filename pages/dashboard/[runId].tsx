@@ -1,10 +1,10 @@
 import { Layout } from '../../components/common/layout';
-import { DatasetList } from '../../components/content/dashboard/datasetList';
+import { Dashboard } from '../../components/content/dashboard/mainDashboard';
 
 export default function DashboardAgencyPage() {
   return (
     <Layout>
-      <DatasetList></DatasetList>
+      <Dashboard />
     </Layout>
   );
 }

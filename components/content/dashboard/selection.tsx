@@ -1,41 +1,30 @@
 import { FC, useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { LinearProgress } from '@mui/material';
 
 import { UserContext } from '../../../context';
-import { ROLE } from '../../../src/models/user';
-import { useRouter } from 'next/router';
+import { Role } from '../../../src/graphql/typings';
 
 export const AgencySelection: FC = () => {
 
   const router = useRouter();
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
 
-    const getUser = async () => {
-      const userLS = await localStorage.getItem('user');
-
-      if (userLS) {
-        setUser(JSON.parse(userLS));
-      }
-    }
-
     if (user) {
-      const agency = user.privileges.find(p => p.roles.includes(ROLE.ADMIN));
+      const agency = user.privileges.find(p => p.roles.includes(Role.Admin));
 
       if (agency) {
-        router.push(`dashboard/${agency.runId}`);
+        router.push(`/dashboard/${agency.runId}`);
       }
 
       return;
     }
 
-    getUser();
-
   }, [user]);
 
   return <div>
-    <p>kbjk</p>
     <LinearProgress />
   </div>;
 };

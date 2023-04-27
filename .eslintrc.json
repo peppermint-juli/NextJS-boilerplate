@@ -25,7 +25,7 @@
     "browser": true
   },
   "ignorePatterns": [
-    "src/generated/typings.ts",
+    "src/graphql/typings.ts",
     "*.js"
   ],
   "rules": {

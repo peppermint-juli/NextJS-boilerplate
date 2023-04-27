@@ -1,24 +1,9 @@
-export interface User {
-  id: string,
-  email: string,
-  firstName?: string,
-  lastName?: string,
-  privileges: Privilege[]
-}
-
-export interface Privilege {
-  runId: string,
-  roles: ROLE[]
-}
-
-export enum ROLE {
-  ADMIN = 'ADMIN',
-  REVIEWER = 'REVIEWER'
-}
+import { Privilege, User } from '../graphql/typings';
 
 export const privilegesConstructor = (payload: any): Privilege => (
   {
     runId: payload.run_id,
+    agency: payload.agency,
     roles: payload.roles
   }
 );

@@ -4,7 +4,7 @@ import { AppContext } from '../../context';
 import { DrawerNav, drawerClosedWidth, drawerOpenWidth } from './drawer';
 
 
-export type Option = 'datasets' | 'notebooks' | 'containers';
+export type Option = 'dashboard' | 'review' | 'about';
 
 type Props = {
   children: any
@@ -21,6 +21,7 @@ const drawerClosedMargin = drawerClosedWidth + netMargin;
 const Styled = styled.div`
   main {
     margin-left: ${(props: StyleProps) => props.open ? drawerOpenMargin : drawerClosedMargin}px;
+    margin-right: ${netMargin}px;
   }
 `;
 

@@ -1,7 +1,9 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable import/no-extraneous-dependencies */
 import axios, { AxiosError } from 'axios';
 import jwt from 'jsonwebtoken';
-import { ROLE, User, userConstructor } from '../../models/user';
+import { Role, User } from '../../graphql/typings';
+import { userConstructor } from '../../models/user';
 import { AuthService } from '../AuthService';
 
 export class AuthAPI {
@@ -9,14 +11,16 @@ export class AuthAPI {
 
   login = async (username: string, password: string): Promise<string> => {
     try {
-      const { status, data } = await axios.post(this.url, { username, password });
+      const { data } = await axios.post(this.url, { username, password });
 
       const token = data.access_token;
       const user: User = userConstructor(jwt.decode(token));
-      console.log(user);
-      if (user.privileges.some(p => p.roles.includes(ROLE.ADMIN))) {
+
+      if (user.privileges.some(p => p.roles.includes(Role.Admin || Role.Sysadmin))) {
+        console.log(token);
+
         await AuthService.login(token);
-        await localStorage.setItem('user', JSON.stringify(user));
+
         return 'Success';
       }
       return 'Access denied';
@@ -30,5 +34,7 @@ export class AuthAPI {
     }
 
   };
+
+
 
 }

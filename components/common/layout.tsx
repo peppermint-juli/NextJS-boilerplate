@@ -1,18 +1,30 @@
 import { FC } from 'react';
-import { DrawerNav } from './drawer';
+import Link from 'next/link';
+import styled from 'styled-components';
+import { Alert } from '@mui/material';
 
-
-export type Option = 'datasets' | 'notebooks' | 'containers';
 
 interface Props {
   children: any
 }
 
+export type TabOption = {
+  name: string
+  value: string
+}
+
+const Styled = styled.div`
+  a {
+    color: ${({ theme }) => theme.palette.primary.dark};
+  }
+`;
+
+export const mediaQuery = 800;
+
 export const Layout: FC<Props> = ({ children }) => {
   return (
-    <>
-      <DrawerNav />
+    <Styled>
       <main>{children}</main>
-    </>
-  )
-}
+    </Styled>
+  );
+};

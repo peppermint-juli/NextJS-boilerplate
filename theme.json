@@ -24,15 +24,13 @@
       "default": "#fafafa"
     },
     "primary": {
-      "light": "rgba(28, 188, 141, 0.6)",
-      "main": "rgba(28, 188, 141, 1)",
-      "dark": "rgba(70, 131, 197, 1)",
+      "light": "##CED6F2",
+      "main": "#899ce1",
+      "dark": "#2a44a2",
       "contrastText": "#fff"
     },
     "secondary": {
-      "light": "rgb(141, 221, 198, 0.6)",
-      "main": "rgb(141, 221, 198, 1)",
-      "dark": "rgb(141, 221, 198, 1)",
+      "main": "#705880",
       "contrastText": "#fff"
     },
     "error": {
@@ -178,7 +176,16 @@
         "font-style": "normal",
         "font-size": "14px",
         "line-height": "16.41px",
-        "letter-spacing": "0.1px"
+        "letter-spacing": "0.1px",
+        "font-family": "\"Roboto Slab\", serif"
+      }
+    },
+    "MuiCard": {
+      "root": {
+        "&:hover": {
+          "cursor": "pointer",
+          "box-shadow": "rgba(0, 0, 0, 0.2) 0px 5px 5px 0px, rgba(0, 0, 0, 0.14) 0px 8px 10px 0px, rgba(0, 0, 0, 0.12) 0px 3px 14px 0px"
+        }
       }
     }
   }

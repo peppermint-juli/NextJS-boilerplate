@@ -1,12 +1,12 @@
 import { Layout } from "components/common/layout";
-import { Main } from "components/contents/main";
+import { NewPayment } from "components/contents/newPayment";
 
 // TODO: imp loading animation here
 export default function MainPage() {
   return (
     <>
       <Layout>
-        <Main />
+        <NewPayment />
       </Layout>
     </>
   );

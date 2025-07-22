@@ -1,7 +1,8 @@
+'use client';
 import { FC } from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Button } from '@mui/material';
-import { useRouter } from 'next/router';
 
 
 export type TabOption = {
@@ -25,15 +26,15 @@ const Styled = styled.div`
 `;
 
 export const Main: FC = () => {
-  const router = useRouter();
-
   return (
     <Styled>
       <div className="payments-section">
         <h1>Payments</h1>
-        <Button variant="contained" color="primary" onClick={() => router.push('/new')}>
-          New Payment
-        </Button>
+        <Link href="/new" passHref>
+          <Button variant="contained" color="primary">
+            New Payment
+          </Button>
+        </Link>
         <Button variant="contained" color="primary">
           Look up by Car Number
         </Button>

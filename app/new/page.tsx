@@ -1,12 +1,10 @@
 import { NewPayment } from 'components/contents/newPayment';
 import { cookies } from 'next/headers';
 import { createTypedServerClient } from 'src/utils/supabase/typed-client';
-import type { Item } from 'src/types/database';
 
 // TODO: imp loading animation here
 export default async function NewPaymentPage() {
-  const cookieStore = await cookies();
-  const supabase = createTypedServerClient(cookieStore);
+  const supabase = await createTypedServerClient(cookies());
 
   // Fetch data from items table with full typing
   const { data, error } = await supabase.from('Items').select('*');

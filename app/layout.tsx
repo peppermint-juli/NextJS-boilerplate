@@ -5,12 +5,11 @@ import { ReactNode } from 'react';
 import '../styles/globals.css';
 import { ClientProviders } from 'components/providers/ClientProviders';
 
-export const hostURL = `${process.env.NEXT_PUBLIC_HOST_BASE_PATH}`;
-export const docsDownloadURL = `${hostURL}docs/`;
+const hostURL = `${process.env.NEXT_PUBLIC_HOST_BASE_PATH}`;
 
 export const metadata = {
-  title: 'BARCS Vaccination Clinic',
-  description: 'BARCS Vaccination Clinic Management System'
+  title: '',
+  description: ''
 };
 
 interface RootLayoutProps {

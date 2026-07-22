@@ -12,19 +12,21 @@ export const createTypedClient = () => {
 };
 
 // For server-side usage (updated version of your existing server.ts)
-export const createTypedServerClient = (cookieStore: ReturnType<typeof cookies>) => {
+export const createTypedServerClient = async (cookieStore: ReturnType<typeof cookies>) => {
+  const resolvedCookieStore = await cookieStore;
+
   return createServerClient<Database>(
     supabaseUrl,
     supabaseKey,
     {
       cookies: {
         getAll() {
-          return cookieStore.getAll();
+          return resolvedCookieStore.getAll();
         },
         setAll(cookiesToSet) {
           try {
             for (const { name, value, options } of cookiesToSet) {
-              cookieStore.set(name, value, options);
+              resolvedCookieStore.set(name, value, options);
             }
           }
           catch {

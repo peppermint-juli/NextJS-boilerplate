@@ -8,4 +8,8 @@ declare module 'styled-components' {
       contrast: string;
     };
   }
+
+  export interface StyledComponentPropsWithRef<P> {
+    theme?: DefaultTheme;
+  }
 }
